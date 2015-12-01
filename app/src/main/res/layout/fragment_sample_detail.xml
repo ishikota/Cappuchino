@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@android:id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title"/>
+
+    <TextView android:id="@+id/like_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="50 likes"/>
+
+    <Button android:id="@+id/like_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/like"/>
+
+</LinearLayout>
