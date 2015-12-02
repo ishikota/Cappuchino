@@ -1,4 +1,4 @@
-package jp.ikota.cappuchino.sampledetail.espresso;
+package com.example.cappuchino.sampledetail.espresso;
 
 import android.app.Instrumentation;
 import android.content.Context;
@@ -7,14 +7,14 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.example.cappuchino.R;
+import com.example.cappuchino.sampledetail.SampleDetailActivity;
+import com.example.cappuchino.samplelist.SampleListFragment;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import jp.ikota.cappuchino.R;
-import jp.ikota.cappuchino.sampledetail.SampleDetailActivity;
-import jp.ikota.cappuchino.samplelist.SampleListFragment;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;

@@ -1,4 +1,4 @@
-package jp.ikota.cappuchino.samplelist.espresso;
+package com.example.cappuchino.samplelist.espresso;
 
 import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.RecyclerView;

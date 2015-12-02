@@ -1,4 +1,4 @@
-package jp.ikota.cappuchino.samplelist.espresso;
+package com.example.cappuchino.samplelist.espresso;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -17,16 +17,16 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.example.cappuchino.sampledetail.SampleDetailActivity;
+import com.example.cappuchino.samplelist.SampleListActivity;
+import com.example.cappuchino.samplelist.SampleListFragment;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import jp.ikota.cappuchino.sampledetail.SampleDetailActivity;
-import jp.ikota.cappuchino.samplelist.SampleListActivity;
-import jp.ikota.cappuchino.samplelist.SampleListFragment;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;

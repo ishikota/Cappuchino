@@ -1,4 +1,4 @@
-package jp.ikota.cappuchino.sampledetail;
+package com.example.cappuchino.sampledetail;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import jp.ikota.cappuchino.R;
-import jp.ikota.cappuchino.samplelist.SampleListFragment;
+import com.example.cappuchino.R;
+import com.example.cappuchino.samplelist.SampleListFragment;
 
 import static java.lang.String.format;
 

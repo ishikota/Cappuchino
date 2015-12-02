@@ -1,4 +1,4 @@
-package jp.ikota.cappuchino.samplelist;
+package com.example.cappuchino.samplelist;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.cappuchino.R;
+import com.example.cappuchino.sampledetail.SampleDetailActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import jp.ikota.cappuchino.R;
-import jp.ikota.cappuchino.sampledetail.SampleDetailActivity;
 
 
 public class SampleListFragment extends Fragment {
