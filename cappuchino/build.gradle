@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'bintray-release'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -16,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
 }
 
 dependencies {
@@ -28,4 +32,13 @@ dependencies {
     compile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
     compile "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
 
+}
+
+publish {
+    userOrg = 'ishikota'
+    groupId = 'jp.ikota'
+    artifactId = 'cappuchino'
+    publishVersion = rootProject.ext.publishVersion
+    desc = 'Espresso wrapper library for writing sweeter test code'
+    website = 'https://github.com/ishikota/Cappuchino'
 }
