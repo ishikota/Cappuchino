@@ -101,7 +101,7 @@ Verifying user scenario like
 1. User clicks a list item to open detail screen
 2. Verify if expected data is passed to detail screen
 
-is also common situation. Let's see cappchino way !!
+is also common situation. Let's see cappuchino way !!
 
 ```java
 @Test
