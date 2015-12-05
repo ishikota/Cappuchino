@@ -34,6 +34,14 @@ public class SampleListFragment extends Fragment {
     private List<Map<String, Object>> mData = new ArrayList<>();
     private boolean mBusy = false;  // if true, in the middle of item loading
 
+    public static SampleListFragment newInstance(boolean empty_mode) {
+        Bundle args = new Bundle();
+        args.putBoolean(SampleListActivity.EMPTY_MODE_KEY, empty_mode);
+        SampleListFragment fragment = new SampleListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,9 +107,17 @@ public class SampleListFragment extends Fragment {
     }
 
     private void populateData() {
-        for (int i = 0; i < 30; i++) {
-            mData.add(makeItem(i));
+        if(isEmptyMode()) {
+           mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            for (int i = 0; i < 30; i++) {
+                mData.add(makeItem(i));
+            }
         }
+    }
+
+    private boolean isEmptyMode() {
+        return getArguments().getBoolean(SampleListActivity.EMPTY_MODE_KEY, false);
     }
 
     private Map<String, Object> makeItem(int forRow) {

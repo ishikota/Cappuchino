@@ -67,6 +67,21 @@ public class SampleListActivityTest extends Cappuchino<SampleListActivity> {
     }
 
     @Test
+    public void showEmptyView() {
+        mIntent.putExtra(SampleListActivity.EMPTY_MODE_KEY, true);
+        launchActivity(mIntent);
+
+        // Check if emptyView's visibility is gone
+        expect(id(android.R.id.empty)).isGone();
+
+        // Wait until item loading is done
+        viewIdlingTarget(android.R.id.progress).waitUntilViewHasGone();
+
+        //Check if emptyView's visibility is visible
+        expect(id(android.R.id.empty)).isVisible();
+    }
+
+    @Test
     public void openDetailScreen() {
         launchActivity(mIntent);
         // Wait until first item is loaded to click item

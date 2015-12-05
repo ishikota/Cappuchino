@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.cappuchino.sampledetail.SampleDetailActivity;
 import com.example.cappuchino.samplelist.SampleListActivity;
@@ -104,6 +105,21 @@ public class SampleListActivityTest {
         onView(withId(android.R.id.list)).check(matches(withListItemCount(60)));
     }
 
+    @Test
+    public void showEmptyView() {
+        mIntent.putExtra(SampleListActivity.EMPTY_MODE_KEY, true);
+        SampleListActivity activity = activityRule.launchActivity(mIntent);
+        ProgressBar progress = getProgress(getFragment(activity));
+
+        // Check if emptyView's visibility is Gone
+        onView(withId(android.R.id.empty)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
+
+        // Wait until item loading is done and check if emptyView's visibility is VISIBLE
+        VisibilityIdlingResource idlingResource = new VisibilityIdlingResource(progress, View.GONE);
+        Espresso.registerIdlingResources(idlingResource);
+        onView(withId(android.R.id.empty)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+        Espresso.unregisterIdlingResources(idlingResource);
+    }
 
     @Test
     public void openDetailScreen() {
@@ -145,6 +161,11 @@ public class SampleListActivityTest {
     @SuppressWarnings("ConstantConditions")
     private RecyclerView getList(Fragment fragment) {
         return (RecyclerView)fragment.getView().findViewById(android.R.id.list);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    private ProgressBar getProgress(Fragment fragment) {
+        return (ProgressBar)fragment.getView().findViewById(android.R.id.progress);
     }
 
 
