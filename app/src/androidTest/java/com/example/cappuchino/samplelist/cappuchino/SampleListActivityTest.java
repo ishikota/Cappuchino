@@ -62,7 +62,7 @@ public class SampleListActivityTest extends Cappuchino<SampleListActivity> {
         perform(id(android.R.id.list)).scrollToPosition(25);
 
         // Check if properly load next 30 items
-        listIdlingTarget(android.R.id.list).waitUntilItemCountOver(31);
+        listIdlingTarget(android.R.id.list).waitUntilItemCountGraterThan(30);
         expect(id(android.R.id.list)).listItemCountIs(60);
     }
 

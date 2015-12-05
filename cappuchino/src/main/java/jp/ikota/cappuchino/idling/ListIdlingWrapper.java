@@ -18,15 +18,15 @@ public class ListIdlingWrapper {
         mTargetView = recyclerView;
     }
 
-    public void waitUntilItemCountOver(int count) {
-        IdlingResource idlingResource = new ListCountIdlingResource(mTargetView, count);
+    public void waitUntilItemCountGraterThan(int count) {
+        IdlingResource idlingResource = new ListCountIdlingResource(mTargetView, count+1);
         Espresso.registerIdlingResources(idlingResource);
         dummyAssertion();
         Espresso.unregisterIdlingResources(idlingResource);
     }
 
     public void waitFirstItemLoad() {
-        waitUntilItemCountOver(1);
+        waitUntilItemCountGraterThan(0);
     }
 
     private void dummyAssertion() {
