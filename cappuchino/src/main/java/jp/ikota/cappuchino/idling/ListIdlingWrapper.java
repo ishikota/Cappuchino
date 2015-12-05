@@ -4,6 +4,7 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.RecyclerView;
 
+import jp.ikota.cappuchino.idling.customresource.CustomIdlingResource;
 import jp.ikota.cappuchino.idling.customresource.ListCountIdlingResource;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -27,6 +28,13 @@ public class ListIdlingWrapper {
 
     public void waitFirstItemLoad() {
         waitUntilItemCountGraterThan(0);
+    }
+
+    public void waitFor(CustomIdlingResource.IdlingRule<RecyclerView> rule) {
+        IdlingResource idlingResource = new CustomIdlingResource<>(mTargetView, rule);
+        Espresso.registerIdlingResources(idlingResource);
+        dummyAssertion();
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     private void dummyAssertion() {

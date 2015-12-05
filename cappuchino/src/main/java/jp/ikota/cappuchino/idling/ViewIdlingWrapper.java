@@ -2,8 +2,10 @@ package jp.ikota.cappuchino.idling;
 
 
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingResource;
 import android.view.View;
 
+import jp.ikota.cappuchino.idling.customresource.CustomIdlingResource;
 import jp.ikota.cappuchino.idling.customresource.VisibilityIdlingResource;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -34,6 +36,13 @@ public class ViewIdlingWrapper {
 
     public void waitUntilViewIsGone() {
         waitUntilViewIs(View.GONE);
+    }
+
+    public void waitFor(CustomIdlingResource.IdlingRule<View> rule) {
+        IdlingResource idlingResource = new CustomIdlingResource<>(mTargetView, rule);
+        Espresso.registerIdlingResources(idlingResource);
+        dummyAssertion();
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     private void dummyAssertion() {
