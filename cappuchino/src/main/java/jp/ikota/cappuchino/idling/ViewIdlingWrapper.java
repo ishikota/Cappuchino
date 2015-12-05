@@ -17,11 +17,23 @@ public class ViewIdlingWrapper {
         mTargetView = view;
     }
 
-    public void waitUntilViewHasGone() {
-        VisibilityIdlingResource idlingResource = new VisibilityIdlingResource(mTargetView, View.GONE);
+    private void waitUntilViewIs(int visibility) {
+        VisibilityIdlingResource idlingResource = new VisibilityIdlingResource(mTargetView, visibility);
         Espresso.registerIdlingResources(idlingResource);
         dummyAssertion();
         Espresso.unregisterIdlingResources(idlingResource);
+    }
+
+    public void waitUntilViewIsVisible() {
+        waitUntilViewIs(View.VISIBLE);
+    }
+
+    public void waitUntilViewIsInvisible() {
+        waitUntilViewIs(View.INVISIBLE);
+    }
+
+    public void waitUntilViewIsGone() {
+        waitUntilViewIs(View.GONE);
     }
 
     private void dummyAssertion() {

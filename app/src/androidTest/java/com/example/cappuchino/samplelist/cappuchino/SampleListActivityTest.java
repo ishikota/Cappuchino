@@ -75,7 +75,7 @@ public class SampleListActivityTest extends Cappuchino<SampleListActivity> {
         expect(id(android.R.id.empty)).isGone();
 
         // Wait until item loading is done
-        viewIdlingTarget(android.R.id.progress).waitUntilViewHasGone();
+        viewIdlingTarget(android.R.id.progress).waitUntilViewIsGone();
 
         //Check if emptyView's visibility is visible
         expect(id(android.R.id.empty)).isVisible();
