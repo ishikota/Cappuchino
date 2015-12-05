@@ -1,6 +1,7 @@
 package com.example.cappuchino.sampledetail;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ public class SampleDetailFragment extends Fragment {
 
         TextView titleText = (TextView)root.findViewById(android.R.id.title);
         final TextView likeText = (TextView)root.findViewById(R.id.like_text);
+        final TextView messageText = (TextView)root.findViewById(android.R.id.message);
         final Button likeButton = (Button)root.findViewById(R.id.like_button);
 
         Bundle args = getArguments();
@@ -52,6 +54,8 @@ public class SampleDetailFragment extends Fragment {
             }
         });
 
+        loadAdditionalData(messageText);
+
         return root;
     }
 
@@ -59,6 +63,15 @@ public class SampleDetailFragment extends Fragment {
         String like_text = mLikeNum > 1 ? format("%d likes", mLikeNum)
                 : mLikeNum == 1 ? "1 like" : getResources().getString(R.string.nolike);
         likeText.setText(like_text);
+    }
+
+    private void loadAdditionalData(final TextView messageView) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                messageView.setText("Cappuchino!!");
+            }
+        }, 3000);
     }
 
 }

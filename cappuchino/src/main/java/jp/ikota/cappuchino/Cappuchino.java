@@ -10,6 +10,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import org.hamcrest.Matcher;
 import org.junit.Rule;
@@ -19,6 +20,7 @@ import java.lang.reflect.Type;
 
 import jp.ikota.cappuchino.action.ViewActionInteraction;
 import jp.ikota.cappuchino.idling.ListIdlingWrapper;
+import jp.ikota.cappuchino.idling.TextViewIdlingWrapper;
 import jp.ikota.cappuchino.idling.ViewIdlingWrapper;
 import jp.ikota.cappuchino.matcher.ViewMatcherInteraction;
 
@@ -72,6 +74,14 @@ public class Cappuchino<T extends Activity> {
     public ViewIdlingWrapper viewIdlingTarget(int target_view_id) {
         View view = findViewFromActivity(target_view_id);
         return new ViewIdlingWrapper(view);
+    }
+
+    public TextViewIdlingWrapper textViewIdlingTarget(int target_view_id) {
+        View view = findViewFromActivity(target_view_id);
+        if(!(view instanceof TextView)) {
+            fail("Target view should be TextView");
+        }
+        return new TextViewIdlingWrapper((TextView)view);
     }
 
     public ListIdlingWrapper listIdlingTarget(int target_view_id) {

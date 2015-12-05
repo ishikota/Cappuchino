@@ -14,6 +14,10 @@ import org.junit.runner.RunWith;
 
 import jp.ikota.cappuchino.Cappuchino;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static jp.ikota.cappuchino.matcher.ViewMatcherWrapper.id;
 
 @RunWith(AndroidJUnit4.class)
@@ -41,6 +45,17 @@ public class SampleDetailActivityTest extends Cappuchino<SampleDetailActivity> {
         // Check if set content which received bia intent
         expect(id(android.R.id.title)).hasText("Cappuchino");
         expect(id(R.id.like_text)).hasText("52 likes");
+    }
+
+    @Test
+    public void loadAdditionalData() {
+        // Setup sample intent
+        mIntent.putExtra(SampleListFragment.TITLE, "Cappuchino");
+        mIntent.putExtra(SampleListFragment.LIKE, 52);
+        activityRule.launchActivity(mIntent);
+        // Wait until additional item loading is done
+        textViewIdlingTarget(android.R.id.message).waitUntilTextChanges();
+        onView(withId(android.R.id.message)).check(matches(withText("Cappuchino!!")));
     }
 
     @Test

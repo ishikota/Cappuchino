@@ -8,6 +8,11 @@
         android:layout_height="wrap_content"
         android:text="title"/>
 
+    <TextView android:id="@android:id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="loading some messages..."/>
+
     <TextView android:id="@+id/like_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

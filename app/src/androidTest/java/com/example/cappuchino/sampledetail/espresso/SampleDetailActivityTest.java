@@ -4,8 +4,10 @@ import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.TextView;
 
 import com.example.cappuchino.R;
 import com.example.cappuchino.sampledetail.SampleDetailActivity;
@@ -56,6 +58,20 @@ public class SampleDetailActivityTest {
         // Check if set content which received bia intent
         onView(withId(android.R.id.title)).check(matches(withText("Cappuchino")));
         onView(withId(R.id.like_text)).check(matches(withText("52 likes")));
+    }
+
+    @Test
+    public void loadAdditionalData() {
+        // Setup sample intent
+        mIntent.putExtra(SampleListFragment.TITLE, "Cappuchino");
+        mIntent.putExtra(SampleListFragment.LIKE, 52);
+        SampleDetailActivity activity = activityRule.launchActivity(mIntent);
+        TextView message = (TextView)activity.findViewById(android.R.id.message);
+        // Wait until additional item loading is done
+        TextChangeIdlingResource idlingResource = new TextChangeIdlingResource(message);
+        Espresso.registerIdlingResources(idlingResource);
+        onView(withId(android.R.id.message)).check(matches(withText("Cappuchino!!")));
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     @Test
