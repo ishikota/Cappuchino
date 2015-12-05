@@ -140,6 +140,11 @@ dependencies {
 }
 ```
 
+If you see some dependency confliction,it would be caused between  
+your app dependencies and Espresso dependencies which Cappuchino uses internally.
+
+Some dependency issues and their solutions are raised [here](https://github.com/ishikota/Cappuchino/issues?utf8=%E2%9C%93&q=is%3Aclosed+label%3Adependency+).
+
 License
 -------
 
