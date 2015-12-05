@@ -77,8 +77,21 @@ public void checkIfProgressIsDisplayedAtFirst() {
 
 Other idling helper methods are ...
 ```java
-viewIdlingTarget(R.id.view).waitUntilViewHasGone();      // wait until view visibility becomes GONE
-listIdlingTarget(R.id.list).waitUntilItemCountOver(30);  // wait until list item count over 30
+viewIdlingTarget(R.id.view).waitUntilViewIsGone();
+listIdlingTarget(R.id.list).waitUntilItemCountGraterThan(30);
+textViewIdlingTarget(R.id.text).waitUntilTextChanges();
+```
+
+You can also define your own idling rule like this
+```java
+// Wait until any item is added on target RecyclerView
+listIdlingTarget(R.id.list)
+    .waitFor(new CustomIdlingResource.IdlingRule<RecyclerView>() {
+      @Override
+      public boolean waitWhileTrue(RecyclerView view) {
+        return view.getAdapter().getItemCount() == 0;
+      }
+    });
 ```
 
 ## Verify launched Activity
@@ -136,7 +149,7 @@ android {
     }
 }
 dependencies {
-    androidTestCompile 'jp.ikota:cappuchino:0.0.1'
+    androidTestCompile 'jp.ikota:cappuchino:1.0.0'
 }
 ```
 
