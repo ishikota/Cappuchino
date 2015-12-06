@@ -82,8 +82,17 @@ listIdlingTarget(R.id.list).waitUntilItemCountGraterThan(30);
 textViewIdlingTarget(R.id.text).waitUntilTextChanges();
 ```
 
-You can also define your own idling rule like this
+
+##Customizing rules
+You can also define custom idling / matcher rules.
 ```java
+// Matches to the TextView which has the text "Cappuchino"
+expect(id(R.id.text)).should(new CustomMatcher.MatcherRule<TextView>() {
+    @Override
+    public boolean matches(TextView textView) {
+        return textView.getText().toString().equals("Cappuchino");
+    }
+});
 // Wait until any item is added on target RecyclerView
 listIdlingTarget(R.id.list)
     .waitFor(new CustomIdlingResource.IdlingRule<RecyclerView>() {
