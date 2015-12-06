@@ -25,7 +25,7 @@ public class CustomMatcher {
             protected boolean matchesSafely(View item) {
                 Class expectedClass = getGenericClass(rule);
                 Class actualClass = item.getClass();
-                if(actualClass.equals(expectedClass)) {
+                if(expectedClass.isAssignableFrom(actualClass)) {
                     return matcher.matches(rule.matches(item));
                 } else {
                     String error = "\n\n" +
@@ -53,8 +53,18 @@ public class CustomMatcher {
     private static Class getGenericClass(Object object) {
         Class<?> clazz = object.getClass();
         Type[] type = clazz.getGenericInterfaces();
-        ParameterizedType pt = (ParameterizedType)type[0];
-        Type[] actualTypeArguments = pt.getActualTypeArguments();
-        return (Class<?>)actualTypeArguments[0];
+        // ClassCastException is occur when no generic type is specified on MatcherRule like this
+        // expect(id(android.R.id.message)).should(new CustomMatcher.MatcherRule() {
+        //     @Override
+        //     public boolean matches(View view) {
+        //        return false;
+        //    }});
+        try {
+            ParameterizedType pt = (ParameterizedType) type[0];
+            Type[] actualTypeArguments = pt.getActualTypeArguments();
+            return (Class<?>) actualTypeArguments[0];
+        } catch (ClassCastException e) {
+            return View.class;
+        }
     }
 }
