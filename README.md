@@ -149,7 +149,7 @@ android {
     }
 }
 dependencies {
-    androidTestCompile 'jp.ikota:cappuchino:1.0.0'
+    androidTestCompile 'jp.ikota:cappuchino:1.1.0'
 }
 ```
 
