@@ -6,6 +6,7 @@ import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.v7.widget.RecyclerView;
@@ -73,6 +74,10 @@ public class Cappuchino<T extends Activity> {
 
     public ViewActionInteraction perform(final Matcher<View> viewMatcher) {
         return new ViewActionInteraction(onView(viewMatcher));
+    }
+
+    public void coffeeBreak(int mills) {
+        SystemClock.sleep(mills);
     }
 
     public ViewIdlingWrapper viewIdlingTarget(int target_view_id) {

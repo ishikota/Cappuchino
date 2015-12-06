@@ -18,6 +18,22 @@ public class ViewActionInteraction {
         mViewInteraction.perform(click());
     }
 
+    public void swipeRight() {
+        mViewInteraction.perform(android.support.test.espresso.action.ViewActions.swipeRight());
+    }
+
+    public void swipeLeft() {
+        mViewInteraction.perform(android.support.test.espresso.action.ViewActions.swipeLeft());
+    }
+
+    public void swipeUp() {
+        mViewInteraction.perform(android.support.test.espresso.action.ViewActions.swipeUp());
+    }
+
+    public void swipeDown() {
+        mViewInteraction.perform(android.support.test.espresso.action.ViewActions.swipeDown());
+    }
+
     public void clickItemAtPosition(int position) {
         mViewInteraction.perform(RecyclerViewActions.actionOnItemAtPosition(position, click()));
     }

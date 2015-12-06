@@ -10,7 +10,6 @@ import org.hamcrest.Matcher;
 import jp.ikota.cappuchino.matcher.custommatcher.CustomMatcher;
 
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static jp.ikota.cappuchino.matcher.custommatcher.CappuchinoMatcher.withListItemCount;
@@ -52,8 +51,8 @@ public class ViewMatcherInteraction {
         match(android.support.test.espresso.matcher.ViewMatchers.isDisplayed());
     }
 
-    public void isDisplayedAtLeast(int areaPercentage) {
-        match(isDisplayingAtLeast(areaPercentage));
+    public void isDisplayingAtLeast(int areaPercentage) {
+        match(android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast(areaPercentage));
     }
 
     public void hasText(String text) {
