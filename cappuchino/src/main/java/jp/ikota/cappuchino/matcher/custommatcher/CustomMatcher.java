@@ -1,37 +1,60 @@
 package jp.ikota.cappuchino.matcher.custommatcher;
 
-import android.support.test.espresso.matcher.BoundedMatcher;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 import static org.hamcrest.core.Is.is;
 
 public class CustomMatcher {
 
-    /**
-     * Check if child count of target RecyclerView matches to expected one
-     * @param expected_count expected item count in target RecyclerView
-     */
-    public static Matcher<View> withListItemCount(final int expected_count) {
-        final Matcher<Integer> matcher = is(expected_count);
-        return new BoundedMatcher<View, RecyclerView>(RecyclerView.class) {
+    public interface MatcherRule<T extends View> {
+        boolean matches(T view);
+    }
+
+    public static Matcher<View> withCustomMatch(final MatcherRule rule) {
+        return new TypeSafeMatcher<View>() {
+            final Matcher<Boolean> matcher = is(true);
 
             @Override
-            protected boolean matchesSafely(RecyclerView recyclerView) {
-                Log.i("withChildCount", "item num is " + (recyclerView.getAdapter().getItemCount()));
-                return matcher.matches(recyclerView.getAdapter().getItemCount());
+            protected boolean matchesSafely(View item) {
+                Class expectedClass = getGenericClass(rule);
+                Class actualClass = item.getClass();
+                if(actualClass.equals(expectedClass)) {
+                    return matcher.matches(rule.matches(item));
+                } else {
+                    String error = "\n\n" +
+                            "You specified to use type [" + expectedClass + "] in CustomMatcher.\n" +
+                            "But matcher target view class was [" +actualClass+"].\n"+
+                            "This exception occurs like below case\n\n"+
+                            "expect(R.id.textview).should(new CustomMatcher.MatcherRule<ImageView>() {\n"+
+                            ".    @Override\n" +
+                            ".    public boolean matches(ImageView view) {\n" +
+                            ".        // ...\n" +
+                            ".    }});"+
+                            "\n";
+                    throw new ClassCastException(error);
+                }
             }
 
             @Override
             public void describeTo(Description description) {
-                description.appendText("with childCount: ");
+                description.appendText("Custom matching result ");
                 matcher.describeTo(description);
             }
         };
     }
 
+    private static Class getGenericClass(Object object) {
+        Class<?> clazz = object.getClass();
+        Type[] type = clazz.getGenericInterfaces();
+        ParameterizedType pt = (ParameterizedType)type[0];
+        Type[] actualTypeArguments = pt.getActualTypeArguments();
+        return (Class<?>)actualTypeArguments[0];
+    }
 }

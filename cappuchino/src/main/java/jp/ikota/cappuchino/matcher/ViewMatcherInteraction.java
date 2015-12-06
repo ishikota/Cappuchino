@@ -4,10 +4,13 @@ package jp.ikota.cappuchino.matcher;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.matcher.ViewMatchers;
 
+import jp.ikota.cappuchino.matcher.custommatcher.CustomMatcher;
+
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static jp.ikota.cappuchino.matcher.custommatcher.CustomMatcher.withListItemCount;
+import static jp.ikota.cappuchino.matcher.custommatcher.CappuchinoMatcher.withListItemCount;
+import static jp.ikota.cappuchino.matcher.custommatcher.CustomMatcher.withCustomMatch;
 import static org.hamcrest.Matchers.anything;
 
 public class ViewMatcherInteraction {
@@ -44,6 +47,10 @@ public class ViewMatcherInteraction {
 
     public void listItemCountIs(int expected_item_count) {
         mViewInteraction.check(matches(withListItemCount(expected_item_count)));
+    }
+
+    public void should(CustomMatcher.MatcherRule rule) {
+        mViewInteraction.check(matches(withCustomMatch(rule)));
     }
 
 }
