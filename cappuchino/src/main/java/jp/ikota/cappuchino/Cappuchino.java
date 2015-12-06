@@ -59,6 +59,10 @@ public class Cappuchino<T extends Activity> {
         return (T)activityRule.getActivity();
     }
 
+    public T launchActivity() {
+        return (T)activityRule.launchActivity(null);
+    }
+
     public T launchActivity(Intent startIntent) {
         return (T)activityRule.launchActivity(startIntent);
     }
