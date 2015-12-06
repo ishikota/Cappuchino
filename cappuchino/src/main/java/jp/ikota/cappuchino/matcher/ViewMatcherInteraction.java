@@ -7,6 +7,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import jp.ikota.cappuchino.matcher.custommatcher.CustomMatcher;
 
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static jp.ikota.cappuchino.matcher.custommatcher.CappuchinoMatcher.withListItemCount;
@@ -31,6 +32,14 @@ public class ViewMatcherInteraction {
 
     public void isGone() {
         mViewInteraction.check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
+    }
+
+    public void isDisplayed() {
+        mViewInteraction.check(matches(android.support.test.espresso.matcher.ViewMatchers.isDisplayed()));
+    }
+
+    public void isDisplayedAtLeast(int areaPercentage) {
+        mViewInteraction.check(matches(isDisplayingAtLeast(areaPercentage)));
     }
 
     public void hasText(String text) {
