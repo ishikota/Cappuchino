@@ -144,8 +144,6 @@ public void openDetailScreen() {
 }
 ```
 
-Working implementation for sample app is placed [here](https://github.com/ishikota/Cappuchino/tree/master/app/src/androidTest/java/com/example/cappuchino).
-
 Installation
 ===
 Set AndroidJUnitRunner as the default test instrumentation runner  
@@ -166,6 +164,15 @@ If you see some dependency confliction,it would be caused between
 your app dependencies and Espresso dependencies which Cappuchino uses internally.
 
 Some dependency issues and their solutions are raised [here](https://github.com/ishikota/Cappuchino/issues?utf8=%E2%9C%93&q=is%3Aclosed+label%3Adependency+).
+
+
+Sample
+===
+If you want to see working implementation of Cappuchino, please see below links.
+
+- [sample app](http://github.com/ishikota/Cappuchino/tree/master/app/src/androidTest/java/com/example/cappuchino) - bundled with this project.
+- [Drive](http://github.com/ishikota/Drive) - simple Dribbble client for showcasing how to use Cappuchino.
+
 
 License
 -------
